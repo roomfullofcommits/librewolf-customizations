@@ -1,0 +1,4 @@
+
+pref("browser.startup.page", 3);
+pref("full-screen-api.ignore-widgets", true);
+
