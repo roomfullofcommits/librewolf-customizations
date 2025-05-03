@@ -2,7 +2,22 @@
 
 git clone --recursive https://gitlab.com/librewolf-community/browser/source.git librewolf-source
 cd librewolf-source
+
 git pull
+git fetch --tags
+
+currentcommit=$(git log -1 --oneline)
+newesttag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
+git checkout $newesttag
+newesttagcommit=$(git log -1 --oneline)
+
+echo "checking for update"
+if [ "$currentcommit" != "$newesttagcommit" ]; then
+    echo "getting newest version, deleting old builds"
+    rm -rf librewolf-* firefox-*
+else
+    echo "already up to date :)"
+fi
 
 echo "make dir"
 make dir
@@ -13,30 +28,35 @@ make build
 
 cd ..
 echo "copying binary"
-rm librewolf
-cp -s librewolf-source/librewolf-*/obj-*/dist/bin/librewolf .
+cp -sf librewolf-source/librewolf-*/obj-*/dist/bin/librewolf .
 
 echo "copying .desktop file"
-rm $HOME/.local/share/applications/librewolf.desktop
-cp $PWD/librewolf.desktop $HOME/.local/share/applications/
+cp -f $PWD/librewolf.desktop $HOME/.local/share/applications/
 
+echo "cloning/updating fx-autoconfig"
 git clone https://github.com/MrOtherGuy/fx-autoconfig.git
 cd fx-autoconfig
 git pull
 cd ..
+
+echo "creating librewolf config"
 rm $HOME/.librewolf/librewolf.overrides.cfg
 cat config.txt >> $HOME/.librewolf/librewolf.overrides.cfg
 cat fx-autoconfig/program/config.js >> $HOME/.librewolf/librewolf.overrides.cfg
 echo "copying profile stuff"
 mkdir desktop-profile/chrome/
-cp -rf fx-autoconfig/profile/chrome/* desktop-profile/chrome
+cp -rsf fx-autoconfig/profile/chrome/* desktop-profile/chrome
 
+echo "cloning/updating firefox-second-sidebar"
 git clone https://github.com/aminought/firefox-second-sidebar.git
 cd firefox-second-sidebar
 git pull
 cd ..
-echo "copying stuff"
-cp -rf firefox-second-sidebar/src/* desktop-profile/chrome/JS/
+echo "copying second sidebar stuff"
+cp -rsf firefox-second-sidebar/src/* desktop-profile/chrome/JS/
+
+echo "cleaning up dangling symlinks"
+find . -xtype l -exec rm {} \;
 
 echo "clearing startup cache"
 rm -r desktop-profile/startupCache

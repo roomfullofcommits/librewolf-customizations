@@ -1,4 +1,7 @@
 
 pref("browser.startup.page", 3);
 pref("full-screen-api.ignore-widgets", true);
+pref("devtools.debugger.remote-enabled", true);
+pref("browser.toolbars.bookmarks.visibility", "never");
+pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
