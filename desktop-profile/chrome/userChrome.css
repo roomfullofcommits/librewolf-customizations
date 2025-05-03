@@ -1,6 +1,34 @@
-#sidebar-header {
+
+@import url(CSS/hide_sidebar.css);
+
+#sidebar-box {
+  /*min-width: 400px !important;*/
+  --uc-sidebar-width: 48px !important;
+  --uc-sidebar-hover-width: 400px !important;
+  --uc-autohide-sidebar-delay: 200ms !important; /* Wait 0.6s before hiding sidebar */
+  --uc-autohide-transition-duration: 200ms !important;
+  --uc-autohide-transition-type: cubic-bezier(.31,.13,.32,1) !important;
+}
+#sidebar-header, #sidebar-splitter, #TabsToolbar {
     display: none;
 }
-#TabsToolbar {
-    display: none;
+#sb2-main {
+    padding-top: var(--sb2-main-padding) !important;
 }
+#sb2-box {
+    padding-inline-start: 0 !important;
+}
+#sb2-splitter-pinned, #sb2-splitter-unpinned {
+    opacity: 0;
+}
+#navigator-toolbox {
+    order: 1;
+}
+#notification-popup {
+    transform: translateY(-250px);
+}
+#urlbar[breakout] {
+    transition: transform .2s;
+    &[breakout-extend] { transform: translatey(-80vh); }
+}
+

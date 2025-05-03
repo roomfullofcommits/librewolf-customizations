@@ -1,0 +1,15 @@
+! 2021-12-07 https://www.youtube.com
+! Removes irrelevant video recommendations from youtube search
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/People also watched/i))
+www.youtube.com##.ytd-rich-section-renderer.style-scope:has(span:has-text(/Breaking news/i))
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/For you/i))
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/Previously watched/i))
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/From related searches/i))
+www.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/Explore More/i))
+
+! Hide shorts section on homepage
+youtube.com##ytd-rich-section-renderer:has(#rich-shelf-header:has-text(Shorts))
+youtube.com##ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(Shorts))
+
+! Remove empty spaces in grid
+youtube.com##ytd-rich-grid-row,#contents.ytd-rich-grid-row:style(display: contents !important)
