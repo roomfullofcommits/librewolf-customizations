@@ -6,4 +6,10 @@ pref("browser.toolbars.bookmarks.visibility", "never");
 pref("toolkit.legacyUserProfileCustomizations.stylesheets");
 pref("clipboard.autocopy", false);
 pref("middlemouse.paste", false);
+pref("browser.tabs.groups.enabled", true);
+pref("browser.sessionstore.max_resumed_crashes", 10);
+pref("browser.sessionstore.max_tabs_undo", 100);
+pref("browser.sessionstore.interval", 5000);
+pref("browser.sessionstore.interval.idle", 30000);
+pref("browser.sessionstore.privacy_level", 0);
 
