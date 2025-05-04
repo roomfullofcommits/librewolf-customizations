@@ -45,7 +45,7 @@ cat config.txt >> $HOME/.librewolf/librewolf.overrides.cfg
 cat fx-autoconfig/program/config.js >> $HOME/.librewolf/librewolf.overrides.cfg
 echo "copying profile stuff"
 mkdir desktop-profile/chrome/
-cp -rsf fx-autoconfig/profile/chrome/* desktop-profile/chrome
+cp -rsf $PWD/fx-autoconfig/profile/chrome/* $PWD/desktop-profile/chrome
 
 echo "cloning/updating firefox-second-sidebar"
 git clone https://github.com/aminought/firefox-second-sidebar.git
@@ -53,7 +53,7 @@ cd firefox-second-sidebar
 git pull
 cd ..
 echo "copying second sidebar stuff"
-cp -rsf firefox-second-sidebar/src/* desktop-profile/chrome/JS/
+cp -rsf $PWD/firefox-second-sidebar/src/* $PWD/desktop-profile/chrome/JS/
 
 echo "cleaning up dangling symlinks"
 find . -xtype l -exec rm {} \;
