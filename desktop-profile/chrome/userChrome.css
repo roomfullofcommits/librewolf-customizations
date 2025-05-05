@@ -19,6 +19,9 @@ button-group {
     moz-button[extension] { display: none !important; }
 }
 #sidebar-main:not([sidebar-launcher-expanded]) {
+    --tabs-closed-width: 56px;
+    --tabs-hover-width: 300px;
+    
     container-type: size;
     container-name: sidebar;
 
@@ -27,32 +30,91 @@ button-group {
     z-index: 10;
     height: 100%;
     transition: width .2s .2s;
-    width: 56px;
+    width: var(--tabs-closed-width);
     
     toolbarbutton { width: auto !important; }
     moz-button { width: 100% !important; }
-    tabs { width: 100% !important; }
+    tabs { 
+        width: 100% !important;
+        &:first-child { margin-top: 2px !important; }
+    }
     tab {
-        &:first-of-type { margin-top: 2px !important; }
         max-width: initial !important;
         .tab-background { width: initial !important; }
     }
+    .tab-group-label-container { 
+        height: 32px !important;
+        padding-block-end: 0 !important;
+    }
+    .tab-group-label {
+        color: light-dark(var(--tab-group-color-pale), var(--tab-group-label-text-dark)) !important;
+        background-color: light-dark(var(--tab-group-color), var(--tab-group-color-invert)) !important;
+        outline: initial !important;
+        outline-offset: initial !important;
+        margin-block: 0 !important;
+        margin-left: 16px !important;
+        padding-block: 0 !important;
+        z-index: 1;
+        
+        transition: padding-block .2s, padding .2s, margin .2s;
+    }
+    tab-group tab {
+        transition: transform .2s, opacity .2s, height .2s, padding-top .2s, padding-bottom .2s !important;
+        display: flex !important;
+    }
+    tab-group[collapsed] tab {
+        opacity: 0;
+        height: 0px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        transform: translateY(-82px);
+    }
     
     &:hover {
-        width: 300px !important;
+        width: var(--tabs-hover-width) !important;
         transition-delay: .02s;
     }
-    @container sidebar (width > 60px) {
+    @container sidebar (width > 56px) {
         .toolbarbutton-text { display: block !important; }
         .tab-label-container { display: flex !important; }
         .tab-throbber, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay {
             &:not([pinned]) { margin-inline-end: var(--tab-icon-end-margin); }
         }
+        .tab-group-label-container {
+            margin-inline-start: 0 !important;
+        }
+        .tab-group-label {
+            &:first-letter {
+                line-height: initial !important;
+                font: inherit !important;
+            }
+            font-size: initial !important;
+            width: initial !important;
+            align-self: start !important;
+            box-sizing: content-box !important;
+            line-height: var(--tab-group-label-height) !important;
+            max-width: -moz-available !important;
+            margin-inline-end: var(--space-medium) !important;
+        }
+    }
+    @container sidebar (width >= 300px) {
+        .tab-group-label { 
+            padding-block: var(--tab-group-label-padding) !important; 
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            margin-left: 10px !important;
+        }
+    }
+    &:hover .tab-group-label {
+        padding-block: var(--tab-group-label-padding) !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin-left: 10px !important;
     }
 }
-&:has(#sidebar-main:not([sidebar-launcher-expanded])) {
+html:not(.sb2-webpanels-window):has(#sidebar-main:not([sidebar-launcher-expanded])) {
     #sidebar-launcher-splitter { display: none; }
-    tabbox { margin-inline-start: 56px !important; }
+    #browser > tabbox { margin-inline-start: 56px !important; }
 }
 #sidebar-main[sidebar-launcher-expanded] {
     min-width: 200px !important;
@@ -96,6 +158,6 @@ tabbox {
 }
 .titlebar-buttonbox-container { display: none; }
 #notification-popup {
-    transform: translateY(-250px);
+    margin-top: -240px !important;
 }
 
