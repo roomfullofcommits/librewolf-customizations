@@ -61,3 +61,8 @@ find . -xtype l -exec rm {} \;
 echo "clearing startup cache"
 rm -r desktop-profile/startupCache
 
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default128.png librewolf
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default64.png librewolf
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default48.png librewolf
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default32.png librewolf
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default16.png librewolf

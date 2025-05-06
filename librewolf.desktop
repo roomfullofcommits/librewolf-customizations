@@ -9,7 +9,7 @@ Comment=Browse the World Wide Web
 Categories=Network;WebBrowser;Security;
 StartupWMClass=librewolf-default
 Exec=sh -c "$HOME/librewolf-customizations/librewolf"
-Icon="$HOME/librewolf-customizations/librewolf-source/themes/browser/branding/librewolf/default128.png"
+Icon=librewolf
 
 Actions=new-window;new-private-window;safe-mode;preferences;profiles;
 
