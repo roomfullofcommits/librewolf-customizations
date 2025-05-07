@@ -114,14 +114,17 @@ button-group {
 }
 html:not(.sb2-webpanels-window):has(#sidebar-main:not([sidebar-launcher-expanded])) {
     #sidebar-launcher-splitter { display: none; }
-    #browser > tabbox { margin-inline-start: 56px !important; }
+    &:not([inDOMFullscreen]) #browser > tabbox { margin-inline-start: 56px !important; }
 }
 #sidebar-main[sidebar-launcher-expanded] {
     min-width: 200px !important;
 }
 
 #sb2-main {
-    padding-top: var(--sb2-main-padding) !important;
+    padding-top: var(--sb2-main-padding) !important;    
+}
+[inDOMFullscreen] #sb2-main {
+    display: none !important;
 }
 #sb2-box {
     padding-inline-start: 0 !important;
@@ -164,10 +167,10 @@ tabbox {
 @property --view-width-px {    
     syntax: '<length>';
     inherits: true;
-    initial-value: calc(100vw - 100px); 
+    initial-value: 100vw; 
 }
-.letterboxing {
-    --vw-unitless: tan(atan2(var(--view-width-px), 1px));
+:root:not([inDOMFullscreen]) .letterboxing {
+    --vw-unitless: calc(tan(atan2(var(--view-width-px), 1px)) - 100);
     --letterboxing-w-unitless: tan(atan2(var(--letterboxing-width), 1px));
     --letterboxing-bgcolor: var(--toolbox-bgcolor-inactive) !important;
     transform-origin: top;
