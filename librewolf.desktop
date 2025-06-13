@@ -8,23 +8,23 @@ MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xm
 Comment=Browse the World Wide Web
 Categories=Network;WebBrowser;Security;
 StartupWMClass=librewolf-default
-Exec=sh -c "$HOME/librewolf-customizations/librewolf"
+Exec=env GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1 librewolf %u
 Icon=librewolf
 
 Actions=new-window;new-private-window;safe-mode;preferences;profiles;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=sh -c "$HOME/librewolf-customizations/librewolf"
+Exec=env GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1 librewolf %u
 [Desktop Action new-private-window]
 Name=New Private Window
-Exec=sh -c "$HOME/librewolf-customizations/librewolf --private-window"
+Exec=env GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1 librewolf --private-window %u
 [Desktop Action safe-mode]
 Name=Start in Safe Mode
-Exec=sh -c "$HOME/librewolf-customizations/librewolf --safe-mode"
+Exec=env GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1 librewolf --safe-mode %u
 [Desktop Action preferences]
 Name=Show Preferences
-Exec=sh -c "$HOME/librewolf-customizations/librewolf --preferences"
+Exec=librewolf --preferences
 [Desktop Action profiles]
 Name=Profile Manager
-Exec=sh -c "$HOME/librewolf-customizations/librewolf --ProfileManager"
+Exec=librewolf --ProfileManager

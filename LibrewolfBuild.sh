@@ -29,6 +29,7 @@ make build
 cd ..
 echo "copying binary"
 cp -sf librewolf-source/librewolf-*/obj-*/dist/bin/librewolf .
+cp -sf "$PWD/"librewolf-source/librewolf-*/obj-*/dist/bin/librewolf "$HOME/.local/bin/"
 
 echo "copying .desktop file"
 cp -f $PWD/librewolf.desktop $HOME/.local/share/applications/
