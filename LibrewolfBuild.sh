@@ -52,6 +52,7 @@ echo "cloning/updating firefox-second-sidebar"
 git clone https://github.com/aminought/firefox-second-sidebar.git
 cd firefox-second-sidebar
 git pull
+git switch -f firefox-update-fixes
 cd ..
 echo "copying second sidebar stuff"
 cp -rsf $PWD/firefox-second-sidebar/src/* $PWD/desktop-profile/chrome/JS/

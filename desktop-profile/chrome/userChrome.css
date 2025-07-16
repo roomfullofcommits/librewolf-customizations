@@ -70,7 +70,7 @@ button-group {
         transform: translateY(-82px);
     }
     
-    &:hover {
+    &:hover, &:-moz-drag-over {
         width: var(--tabs-hover-width) !important;
         transition-delay: .02s;
     }
@@ -88,6 +88,7 @@ button-group {
                 line-height: initial !important;
                 font: inherit !important;
             }
+            font-size-adjust: initial !important;
             font-size: initial !important;
             width: initial !important;
             align-self: start !important;
