@@ -52,7 +52,6 @@ button-group {
         outline: initial !important;
         outline-offset: initial !important;
         margin-block: 0 !important;
-        margin-left: 16px !important;
         padding-block: 0 !important;
         z-index: 1;
         
@@ -103,14 +102,12 @@ button-group {
             padding-block: var(--tab-group-label-padding) !important; 
             padding-left: 10px !important;
             padding-right: 10px !important;
-            margin-left: 10px !important;
         }
     }
     &:hover .tab-group-label {
         padding-block: var(--tab-group-label-padding) !important;
         padding-left: 10px !important;
         padding-right: 10px !important;
-        margin-left: 10px !important;
     }
 }
 html:not(.sb2-webpanels-window):has(#sidebar-main:not([sidebar-launcher-expanded])) {
