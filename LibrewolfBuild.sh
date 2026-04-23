@@ -1,37 +1,30 @@
 #!/bin/bash
 
-git clone --recursive https://gitlab.com/librewolf-community/browser/source.git librewolf-source
-cd librewolf-source
-
-git pull
-git fetch --tags
-
-currentcommit=$(git log -1 --oneline)
-newesttag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-git checkout $newesttag
-newesttagcommit=$(git log -1 --oneline)
-
-echo "checking for update"
-if [ "$currentcommit" != "$newesttagcommit" ]; then
-    echo "getting newest version, deleting old builds"
-    rm -rf librewolf-* firefox-*
-else
-    echo "already up to date :)"
+paru -G librewolf
+if ! [ $? -eq 0 ]; then
+	echo "couldn't get build files, exiting"
+	exit 1
 fi
 
-echo "make dir"
-make dir
-echo "make bootstrap"
-make bootstrap
-echo "make build"
-make build
+cd librewolf
 
+makepkg -C --noarchive
+if ! [ $? -eq 0 ]; then
+        echo "build failed, exiting"
+        exit 2
+fi
 cd ..
+
+rm -r librewolf-build
+cp -r librewolf/src/librewolf-*/ librewolf-build
+
 echo "copying binary"
-cp -sf librewolf-source/librewolf-*/obj-*/dist/bin/librewolf .
-cp -sf "$PWD/"librewolf-source/librewolf-*/obj-*/dist/bin/librewolf "$HOME/.local/bin/"
+cp -sf librewolf-build/obj-x86_64-pc-linux-gnu/dist/bin/librewolf-bin .
+mkdir "$HOME/.local/bin/"
+cp -sf "$PWD/"librewolf-build/obj-x86_64-pc-linux-gnu/dist/bin/librewolf-bin "$HOME/.local/bin/librewolf"
 
 echo "copying .desktop file"
+mkdir $HOME/.local/share/applications/
 cp -f $PWD/librewolf.desktop $HOME/.local/share/applications/
 
 echo "cloning/updating fx-autoconfig"
@@ -42,6 +35,7 @@ cd ..
 
 echo "creating librewolf config"
 rm $HOME/.librewolf/librewolf.overrides.cfg
+mkdir $HOME/.librewolf/
 cat config.txt >> $HOME/.librewolf/librewolf.overrides.cfg
 cat fx-autoconfig/program/config.js >> $HOME/.librewolf/librewolf.overrides.cfg
 echo "copying profile stuff"
@@ -63,8 +57,8 @@ find . -xtype l -exec rm {} \;
 echo "clearing startup cache"
 rm -r desktop-profile/startupCache
 
-xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default128.png librewolf
-xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default64.png librewolf
-xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default48.png librewolf
-xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default32.png librewolf
-xdg-icon-resource install --novendor --context apps --size 128 librewolf-source/themes/browser/branding/librewolf/default16.png librewolf
+xdg-icon-resource install --novendor --context apps --size 128 librewolf-build/browser/branding/librewolf/default128.png librewolf
+xdg-icon-resource install --novendor --context apps --size 64 librewolf-build/browser/branding/librewolf/default64.png librewolf
+xdg-icon-resource install --novendor --context apps --size 48 librewolf-build/browser/branding/librewolf/default48.png librewolf
+xdg-icon-resource install --novendor --context apps --size 32 librewolf-build/browser/branding/librewolf/default32.png librewolf
+xdg-icon-resource install --novendor --context apps --size 16 librewolf-build/browser/branding/librewolf/default16.png librewolf
