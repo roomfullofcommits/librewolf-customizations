@@ -173,8 +173,9 @@ html:not(.sb2-webpanels-window):has(#sidebar-main:not([sidebar-launcher-expanded
         }
     }
 }
-tabbox {
+html:not([fullscreenNavToolboxHidden]) tabbox {
     outline: none !important;
+    margin-left: 55px !important;
 }
 .titlebar-buttonbox-container { display: none; }
 #notification-popup {
