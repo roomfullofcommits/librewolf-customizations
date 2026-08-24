@@ -18,7 +18,23 @@ button-group {
     padding-top: 6px;
     moz-button[extension] { display: none !important; }
 }
-#sidebar-main:not([sidebar-launcher-expanded]) {
+:root {
+    --tab-group-blue: var(--color-blue-20);
+    --tab-group-purple: var(--color-purple-20);
+    --tab-group-cyan: var(--color-cyan-20);
+    --tab-group-orange: var(--color-orange-20);
+    --tab-group-yellow: var(--color-yellow-20);
+    --tab-group-pink: var(--color-pink-20);
+    --tab-group-green: var(--color-green-20);
+    --tab-group-red: var(--color-red-20);
+    --tab-group-pale: var(--color-pale-20);
+}
+#sidebar-container {
+    label.tab-group-label[role="button"] {
+        background-color: var(--tab-group-color) !important;
+    }
+}
+#sidebar-container:not([sidebar-launcher-expanded]) {
     --tabs-closed-width: 56px;
     --tabs-hover-width: 300px;
     
@@ -26,12 +42,15 @@ button-group {
     container-name: sidebar;
 
     position: absolute;
-    background-color: var(--toolbox-bgcolor);
+    background-color: var(--toolbox-background-color);
     z-index: 10;
     height: 100%;
     transition: width .2s .2s;
     width: var(--tabs-closed-width);
     
+    .buttons-wrapper {
+        display: none;
+    }
     toolbarbutton { width: auto !important; }
     moz-button { width: 100% !important; }
     tabs { 
@@ -114,7 +133,7 @@ html:not(.sb2-webpanels-window):has(#sidebar-main:not([sidebar-launcher-expanded
     #sidebar-launcher-splitter { display: none; }
     &:not([inDOMFullscreen]) #browser > tabbox { margin-inline-start: 56px !important; }
 }
-#sidebar-main[sidebar-launcher-expanded] {
+#sidebar-container[sidebar-launcher-expanded] {
     min-width: 200px !important;
 }
 
